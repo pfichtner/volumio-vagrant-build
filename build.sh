@@ -22,5 +22,8 @@ for DEV in $DEVICES; do
 done
 
 vagrant_copy default:build/*.img default:build/*.img.md5 .
+for f in *.img; do
+	bzip2 -9 "$f"
+done
 vagrant destroy -f
 
