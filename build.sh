@@ -4,18 +4,18 @@ VERSION="2.729"
 DEVICES="orangepipc orangepione orangepilite"
 
 vagrant_copy() {
-	tmpfile=`mktemp /tmp/vagrant-ssh-config.XXXX`
-	vagrant ssh-config >$tmpfile
-	scp -F $tmpfile "$@"
-	rm $tmpfile
+	TMPFILE=`mktemp vagrant-ssh-config.XXXXXXXXXX`
+	vagrant ssh-config >$TMPFILE
+	scp -F $TMPFILE "$@"
+	rm $TMPFILE
 }
 
 volumio_build() {
-	echo "cd build/ && sudo -E bash build.sh -b arm -d $1 -v $2" | vagrant ssh
+	vagrant ssh -c "cd build/ && sudo -E bash build.sh -b armv7 -d $1 -v $2"
 }
 
 vagrant up
-echo "git clone https://github.com/volumio/Build build" | vagrant ssh
+vagrant ssh -c "git clone https://github.com/volumio/Build build"
 
 for DEV in $DEVICES; do
 	volumio_build $DEV $VERSION
