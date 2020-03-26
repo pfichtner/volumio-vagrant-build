@@ -44,5 +44,4 @@ deploy:
   file: Volumio*.img.*
   on:
     repo: pfichtner/volumio-vagrant-build
-    tags: true
     all_branches: true
