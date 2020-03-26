@@ -21,10 +21,13 @@ install:
 - sudo vagrant plugin install vagrant-libvirt
 
 env:
-- PROVIDER=libvirt
-- VERSION="2.729"
-# values orangepipc orangepione orangepilite
-- DEVICE="orangepilite"
+  global: 
+    - PROVIDER=libvirt
+    - VERSION="2.729"
+  jobs: 
+    - DEVICE="orangepipc"
+    - DEVICE="orangepione"
+    - DEVICE="orangepilite"
 
 script:
 - sudo sh -x build.sh
