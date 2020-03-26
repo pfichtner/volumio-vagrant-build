@@ -13,9 +13,7 @@ else
 	vagrant up --provider="$PROVIDER"
 fi
 
-vagrant ssh -c "git clone https://github.com/volumio/Build build && cd build/ && sudo -E bash build.sh -b armv7 -d $DEVICE -v $VERSION"
-vagrant ssh -c "ls -ltrh build"
-vagrant ssh -c "cd build/ && sudo bzip2 -9 Volumio$VERSION-*-$DEVICE.img"
+vagrant ssh -c "git clone https://github.com/volumio/Build build && cd build/ && sudo -E bash build.sh -b armv7 -d $DEVICE -v $VERSION && sudo bzip2 -9 Volumio$VERSION-*-$DEVICE.img"
 vagrant_copy default:build/*.img.bz2 default:build/*.img.md5 .
 vagrant destroy -f
 
