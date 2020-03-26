@@ -3,7 +3,7 @@ sudo -E apt install -y git git squashfs-tools kpartx multistrap qemu-user-static
 SCRIPT
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/stretch64"
+  config.vm.box = "generic/debian9"
   config.vm.provision "shell", inline: $script
 end
 
