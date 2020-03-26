@@ -15,13 +15,16 @@ install:
 - sudo dpkg -i vagrant_2.2.7_x86_64.deb
 
 # Vagrant correctly installed?
- - vagrant --version
+- vagrant --version
 
 # Install vagrant-libvirt Vagrant plugin
 - sudo vagrant plugin install vagrant-libvirt
 
 env:
 - PROVIDER=libvirt
+- VERSION="2.729"
+# values orangepipc orangepione orangepilite
+- DEVICE="orangepilite"
 
 script:
 - sudo sh -x build.sh
