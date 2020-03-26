@@ -1,7 +1,8 @@
 #!/bin/sh
 
 VERSION="2.729"
-DEVICES="orangepipc orangepione orangepilite"
+DEVICES="orangepilite"
+#DEVICES="orangepipc orangepione orangepilite"
 
 vagrant_copy() {
 	TMPFILE=`mktemp vagrant-ssh-config.XXXXXXXXXX`
