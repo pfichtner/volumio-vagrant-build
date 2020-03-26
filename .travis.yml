@@ -47,4 +47,3 @@ deploy:
   on:
     tags: true
     repo: pfichtner/volumio-vagrant-build
-    all_branches: true
