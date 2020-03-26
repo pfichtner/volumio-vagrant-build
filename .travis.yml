@@ -22,6 +22,9 @@ install:
 
 env:
 - PROVIDER=libvirt
+- VERSION="2.729"
+# values orangepipc orangepione orangepilite
+- DEVICE="orangepilite"
 
 script:
 - sudo sh -x build.sh
