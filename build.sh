@@ -15,7 +15,7 @@ volumio_build() {
 	vagrant ssh -c "cd build/ && for f in *.img; do bzip2 -9 "$f"; done"
 }
 
-vagrant up
+vagrant up --provider=libvirt
 vagrant ssh -c "git clone https://github.com/volumio/Build build"
 
 for DEV in $DEVICES; do
