@@ -12,6 +12,7 @@ vagrant_copy() {
 
 volumio_build() {
 	vagrant ssh -c "cd build/ && sudo -E bash build.sh -b armv7 -d $1 -v $2"
+	vagrant ssh -c "cd build/ && for f in *.img; do bzip2 -9 "$f"; done"
 }
 
 vagrant up
@@ -21,9 +22,6 @@ for DEV in $DEVICES; do
 	volumio_build $DEV $VERSION
 done
 
-vagrant_copy default:build/*.img default:build/*.img.md5 .
-for f in *.img; do
-	bzip2 -9 "$f"
-done
+vagrant_copy default:build/*.img.bz2 default:build/*.img.md5 .
 vagrant destroy -f
 
