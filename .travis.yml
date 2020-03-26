@@ -21,6 +21,9 @@ install:
 # Install vagrant-libvirt Vagrant plugin
 - sudo vagrant plugin install vagrant-libvirt
 
+env: 
+- PROVIDER=libvirt
+
 script:
 - sudo sh -x build.sh
 
