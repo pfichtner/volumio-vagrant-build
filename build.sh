@@ -12,7 +12,7 @@ vagrant_copy() {
 }
 
 volumio_build() {
-	vagrant ssh -c "cd build/ && sudo -E bash build.sh -b armv7 -d $1 -v $2 && bzip2 -9 Volumio$2-*-$1.img"
+	vagrant ssh -c "cd build/ && sudo -E bash build.sh -b armv7 -d $1 -v $2 && bzip2 -9 Volumio$2-*-$1.img && find"
 }
 
 if [ -z "$PROVIDER" ]; then
