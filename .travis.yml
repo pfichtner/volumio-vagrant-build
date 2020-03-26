@@ -44,3 +44,4 @@ deploy:
     - Volumio*-*-*.img.md5
   on:
     repo: pfichtner/volumio-vagrant-build
+    all_branches: true
