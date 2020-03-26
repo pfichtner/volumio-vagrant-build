@@ -23,5 +23,5 @@ install:
 
 script:
 - sudo vagrant up --provider=libvirt
-- sh build.sh
+- sh -x build.sh
 
