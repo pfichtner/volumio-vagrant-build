@@ -40,7 +40,7 @@ jobs:
         - DEVICE="orangepilite"
       script: sudo sh -x build.sh && ls -lh
     - stage: deploy
-      script: echo "Deploying to GitHub releases"
+      script: echo "Deploying to GitHub releases" && ls -lh
       deploy:
         provider: releases
         api_key:
