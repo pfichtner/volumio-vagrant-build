@@ -28,6 +28,8 @@ env:
     - DEVICE="orangepipc"
     - DEVICE="orangepione"
     - DEVICE="orangepilite"
+script:
+- sudo sh -x build.sh && ls -lh
 
 before_deploy:
 - git tag "$(date +'%Y%m%d%H%M%S')-$DEVICE-$(git log --format=%h -1)"
