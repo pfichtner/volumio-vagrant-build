@@ -24,25 +24,29 @@ env:
   global: 
     - PROVIDER=libvirt
     - VERSION="2.729"
-  jobs: 
-    - DEVICE="orangepipc"
-    - DEVICE="orangepione"
-    - DEVICE="orangepilite"
 
-script:
-- sudo sh -x build.sh && ls -lh
+jobs: 
+  include:
+    - stage: compile
+      env: 
+        - DEVICE="orangepipc"
+        - DEVICE="orangepione"
+        - DEVICE="orangepilite"
+      script: sudo sh -x build.sh && ls -lh
+    - stage: deploy
+      script: echo "Deploying to GitHub releases"
+      deploy:
+        provider: releases
+        api_key:
+          secure: Z5ZMZiELRBS+gwjb3EMGRPWk58F4SrvSq3CM2DvH38t5T2p4vO9QVMJbXjdwmK+sSCe1VZq6K12LV2QMsjXPijp6dH1+TSjNQbcCYb4sOrKoYF6u4THdbBu4fTwVhxn2DGAUr4R0QCPDJacKKOcs80e9vamhmagCtxqe/YS3zK9xhSQbbG9SE7o5yuABfmSO4RvhMZ4DSSxWkPQqOYtagjLCiPED7HW0N55h/BkY6WXvrzcBUpIW+5eutdlPIc5ZAeeCscZp3hbMGwbGE0byLeWs1O70pudVGsFPsXY4G2p3B2IpsxwgL0dnqaWcCBFy0hQKcyngYqJixKJDi1QsH/Zgrk4guZp8LQ9Vaf7aKeLDSsKZF69l9/TRdDrrRBtELvJTCIzliZ4FKJMBZGsfnyJUSpKZV/A50O9JncyWovm9ogenJwsR+/l5GAqxhfiVJebuvUqQ49tq/Rgnx+Dm49zlP9DpVut2jDPBJInriO03UWAGi+An/9S5YycD5VPfRy0Qc0CzhWAP0bVvZ6M79jnqVhVzKHAK3NztMbTA9HHNAbiDc6lV2dzGFeYaZ1Mcz08sibY/wcWYqWnTJn+ylfrLqcYhJWBQpBg6uCpWBCXpPfmCD7jZknPptVkfmHA9SR4TG1zTuHJfYjmY8fDdIQfjXAb/MtgLVz/na2LsCIk=
+        skip_cleanup: true
+        cleanup: false
+        file_glob: true
+        file: Volumio*.img.*
+        on:
+          repo: pfichtner/volumio-vagrant-build
+          all_branches: true
 
 before_deploy:
 - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 
-deploy:
-  provider: releases
-  api_key:
-    secure: Z5ZMZiELRBS+gwjb3EMGRPWk58F4SrvSq3CM2DvH38t5T2p4vO9QVMJbXjdwmK+sSCe1VZq6K12LV2QMsjXPijp6dH1+TSjNQbcCYb4sOrKoYF6u4THdbBu4fTwVhxn2DGAUr4R0QCPDJacKKOcs80e9vamhmagCtxqe/YS3zK9xhSQbbG9SE7o5yuABfmSO4RvhMZ4DSSxWkPQqOYtagjLCiPED7HW0N55h/BkY6WXvrzcBUpIW+5eutdlPIc5ZAeeCscZp3hbMGwbGE0byLeWs1O70pudVGsFPsXY4G2p3B2IpsxwgL0dnqaWcCBFy0hQKcyngYqJixKJDi1QsH/Zgrk4guZp8LQ9Vaf7aKeLDSsKZF69l9/TRdDrrRBtELvJTCIzliZ4FKJMBZGsfnyJUSpKZV/A50O9JncyWovm9ogenJwsR+/l5GAqxhfiVJebuvUqQ49tq/Rgnx+Dm49zlP9DpVut2jDPBJInriO03UWAGi+An/9S5YycD5VPfRy0Qc0CzhWAP0bVvZ6M79jnqVhVzKHAK3NztMbTA9HHNAbiDc6lV2dzGFeYaZ1Mcz08sibY/wcWYqWnTJn+ylfrLqcYhJWBQpBg6uCpWBCXpPfmCD7jZknPptVkfmHA9SR4TG1zTuHJfYjmY8fDdIQfjXAb/MtgLVz/na2LsCIk=
-  skip_cleanup: true
-  cleanup: false
-  file_glob: true
-  file: Volumio*.img.*
-  on:
-    repo: pfichtner/volumio-vagrant-build
-    all_branches: true
