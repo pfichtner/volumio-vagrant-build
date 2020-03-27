@@ -30,7 +30,13 @@ jobs:
     - stage: compile
       env: 
         - DEVICE="orangepipc"
+      script: sudo sh -x build.sh && ls -lh
+    - stage: compile
+      env: 
         - DEVICE="orangepione"
+      script: sudo sh -x build.sh && ls -lh
+    - stage: compile
+      env: 
         - DEVICE="orangepilite"
       script: sudo sh -x build.sh && ls -lh
     - stage: deploy
