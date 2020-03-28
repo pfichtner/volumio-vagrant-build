@@ -20,16 +20,14 @@ install:
 # Install vagrant-libvirt Vagrant plugin
 - sudo vagrant plugin install vagrant-libvirt
 
-# Use same tag for all jobs
-
 env:
   global: 
     - PROVIDER=libvirt
     - VERSION="2.729"
   jobs: 
-    - DEVICE="orangepipc"
-    - DEVICE="orangepione"
-    - DEVICE="orangepilite"
+    - DEVICE="orangepipc"   ARCH="armv7"
+    - DEVICE="orangepione"  ARCH="armv7"
+    - DEVICE="orangepilite" ARCH="armv7"
 script:
 - sudo sh -x build.sh && ls -lh
 
