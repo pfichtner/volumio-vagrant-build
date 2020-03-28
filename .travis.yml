@@ -32,7 +32,7 @@ script:
 - sudo sh -x build.sh && ls -lh
 
 before_deploy:
-- git tag "$(date +'%Y%m%d')-$(git log --format=%h -1)"
+- git tag "$(date +'%Y%m%d')-$(git log --format=%h -1)" || true
 
 deploy:
   provider: releases
