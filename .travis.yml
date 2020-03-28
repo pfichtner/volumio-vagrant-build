@@ -47,4 +47,5 @@ deploy:
   file: Volumio*$DEVICE.img.*
   on:
     repo: pfichtner/volumio-vagrant-build
+    all_branches: true
 
