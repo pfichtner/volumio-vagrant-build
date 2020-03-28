@@ -21,7 +21,6 @@ install:
 - sudo vagrant plugin install vagrant-libvirt
 
 # Use same tag for all jobs
-- export TRAVIS_TAG="$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 
 env:
   global: 
@@ -35,7 +34,7 @@ script:
 - sudo sh -x build.sh && ls -lh
 
 before_deploy:
-- git tag $TRAVIS_TAG
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 
 deploy:
   provider: releases
@@ -45,8 +44,7 @@ deploy:
   cleanup: false
   overwrite: true
   file_glob: true
-  file: Volumio*.img.*
+  file: Volumio*$DEVICE.img.*
   on:
     repo: pfichtner/volumio-vagrant-build
-    all_branches: true
 
