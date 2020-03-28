@@ -20,6 +20,9 @@ install:
 # Install vagrant-libvirt Vagrant plugin
 - sudo vagrant plugin install vagrant-libvirt
 
+# Use same tag for all jobs
+- export TRAVIS_TAG="$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+
 env:
   global: 
     - PROVIDER=libvirt
@@ -32,7 +35,7 @@ script:
 - sudo sh -x build.sh && ls -lh
 
 before_deploy:
-- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+- git tag $TRAVIS_TAG
 
 deploy:
   provider: releases
